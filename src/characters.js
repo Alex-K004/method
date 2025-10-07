@@ -4,21 +4,21 @@ class Character {
     this.type = type;
     this.health = 100;
     this.level = 1;
-    
+
     this.validate();
   }
 
   validate() {
     const validTypes = ['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
-    
+
     if (typeof this.name !== 'string') {
       throw new Error('Имя должно быть строкой');
     }
-    
+
     if (this.name.length < 2 || this.name.length > 10) {
       throw new Error('Имя должно содержать от 2 до 10 символов');
     }
-    
+
     if (!validTypes.includes(this.type)) {
       throw new Error('Неверный тип персонажа');
     }
@@ -28,7 +28,7 @@ class Character {
     if (this.health <= 0) {
       throw new Error('Нельзя повысить левел умершего');
     }
-    
+
     this.level += 1;
     this.attack = Math.round(this.attack * 1.2);
     this.defence = Math.round(this.defence * 1.2);
@@ -39,14 +39,15 @@ class Character {
     if (this.health <= 0) {
       return;
     }
-    
+
+    // Игнорируем отрицательный урон
     if (points < 0) {
       return;
     }
-    
+
     const damageTaken = points * (1 - this.defence / 100);
     this.health -= damageTaken;
-    
+
     if (this.health < 0) {
       this.health = 0;
     }
@@ -108,5 +109,5 @@ module.exports = {
   Magician,
   Undead,
   Zombie,
-  Daemon
+  Daemon,
 };

@@ -5,14 +5,14 @@ const {
   Magician,
   Undead,
   Zombie,
-  Daemon
+  Daemon,
 } = require('../src/characters');
 
 describe('Character Classes', () => {
   describe('Base Character Class', () => {
     test('should create character with default values', () => {
       const char = new Bowman('Legolas');
-      
+
       expect(char.name).toBe('Legolas');
       expect(char.type).toBe('Bowman');
       expect(char.health).toBe(100);
@@ -88,24 +88,24 @@ describe('Character Classes', () => {
     test('should increase level and stats by 20%', () => {
       const bowman = new Bowman('Legolas');
       bowman.levelUp();
-      
+
       expect(bowman.level).toBe(2);
-      expect(bowman.attack).toBe(30); 
-      expect(bowman.defence).toBe(30); 
+      expect(bowman.attack).toBe(30);
+      expect(bowman.defence).toBe(30);
       expect(bowman.health).toBe(100);
     });
 
     test('should throw error when leveling up dead character', () => {
       const bowman = new Bowman('Legolas');
       bowman.health = 0;
-      
+
       expect(() => bowman.levelUp()).toThrow('Нельзя повысить левел умершего');
     });
 
     test('should throw error when leveling up character with negative health', () => {
       const bowman = new Bowman('Legolas');
       bowman.health = -10;
-      
+
       expect(() => bowman.levelUp()).toThrow('Нельзя повысить левел умершего');
     });
 
@@ -113,23 +113,23 @@ describe('Character Classes', () => {
       const bowman = new Bowman('Legolas');
       bowman.health = 50;
       bowman.levelUp();
-      
+
       expect(bowman.health).toBe(100);
     });
 
     test('should work correctly with decimal values', () => {
       const magician = new Magician('Gandalf');
       magician.levelUp();
-      
-      expect(magician.attack).toBe(12); 
-      expect(magician.defence).toBe(48); 
+
+      expect(magician.attack).toBe(12);
+      expect(magician.defence).toBe(48);
     });
 
     test('should work correctly for multiple level ups', () => {
       const swordsman = new Swordsman('Aragorn');
-      swordsman.levelUp(); 
-      swordsman.levelUp(); 
-      
+      swordsman.levelUp();
+      swordsman.levelUp();
+
       expect(swordsman.level).toBe(3);
       expect(swordsman.health).toBe(100);
     });
@@ -146,7 +146,7 @@ describe('Character Classes', () => {
     test('should not reduce health below 0', () => {
       const bowman = new Bowman('Legolas');
       bowman.damage(200);
-      
+
       expect(bowman.health).toBe(0);
     });
 
@@ -154,7 +154,7 @@ describe('Character Classes', () => {
       const bowman = new Bowman('Legolas');
       bowman.health = 0;
       bowman.damage(50);
-      
+
       expect(bowman.health).toBe(0);
     });
 
@@ -176,7 +176,7 @@ describe('Character Classes', () => {
       const bowman = new Bowman('Legolas');
       const initialHealth = bowman.health;
       bowman.damage(0);
-      
+
       expect(bowman.health).toBe(initialHealth);
     });
 
@@ -184,8 +184,8 @@ describe('Character Classes', () => {
       const bowman = new Bowman('Legolas');
       const initialHealth = bowman.health;
       bowman.damage(-10);
-      
-              expect(bowman.health).toBe(initialHealth);
+
+      expect(bowman.health).toBe(initialHealth);
     });
 
     test('should work with decimal damage values', () => {
@@ -201,7 +201,7 @@ describe('Character Classes', () => {
       const bowman = new Bowman('Legolas');
       bowman.damage(40);
       bowman.levelUp();
-      
+
       expect(bowman.level).toBe(2);
       expect(bowman.health).toBe(100);
       expect(bowman.attack).toBe(30);
@@ -209,9 +209,9 @@ describe('Character Classes', () => {
 
     test('damage calculation should use updated stats after level up', () => {
       const bowman = new Bowman('Legolas');
-      bowman.levelUp(); 
+      bowman.levelUp();
       bowman.damage(40);
-      
+
       expect(bowman.health).toBe(72);
     });
   });
@@ -229,7 +229,7 @@ describe('Character Classes', () => {
     test('all characters should inherit from Character', () => {
       const bowman = new Bowman('Test');
       expect(bowman instanceof Character).toBe(true);
-      
+
       const swordsman = new Swordsman('Test');
       expect(swordsman instanceof Character).toBe(true);
     });
