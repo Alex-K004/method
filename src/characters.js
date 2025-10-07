@@ -1,3 +1,5 @@
+'use strict';
+
 class Character {
   constructor(name, type) {
     this.name = name;
@@ -40,7 +42,6 @@ class Character {
       return;
     }
 
-    // Игнорируем отрицательный урон
     if (points < 0) {
       return;
     }

@@ -6,12 +6,23 @@
     "es6": true,
     "jest": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "script"
+  },
+  "ignorePatterns": ["webpack.config.js"],
   "rules": {
     "no-console": "off",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "no-underscore-dangle": "off",
     "max-classes-per-file": "off",
     "no-useless-constructor": "off",
-    "no-empty-function": "off"
+    "no-empty-function": "off",
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "strict": ["error", "global"],
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-unused-vars": "error"
   }
 }
